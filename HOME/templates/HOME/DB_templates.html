@@ -1,0 +1,83 @@
+{% extends 'HOME/base.html' %}
+{% load pagination_tag %}
+{% load static %}
+{% block content %}
+
+    <div class="content__templates">
+        <!--DB templates-->
+        <div class="query_results" style="padding-top: 3vh;">
+            <span class="query_title" >recent templates</span>
+            {%for template in query%}
+                <div class="template">
+                    <a  href="{% url 'template-detail' template.id %}">
+                        <div class="DB_img" style="background-image: url('{{template.desktop_img.url}}');background-size: 100% 100%; background-repeat:no-repeat;">
+                            <div class="tags_wraper">
+                            </div>
+                            </div>
+                    </a>
+                    <div class="template_description">                    <div>
+                        <a  href="{% url 'template-detail' template.id %}">
+                        <p class="title">{{template.title}}</p>
+                    </a>
+                        <p class="date"><i class="fa-solid fa-calendar-days showi"></i> {{template.date_posted|date:"M d,Y"}}</p>
+                        {% if template.tags %}
+                        <form method=GET action="{%url 'search'%}">
+                            <div class="template_tags">
+                            {% for tag in template.tags.all %}
+                            <label for="{{tag}}"> <p>{{tag}}</p>
+                                <input id="{{tag}}" class="input_filter" name="tag" type="checkbox" value="{{tag}}" onchange="this.form.submit()" hidden>
+                                </label>
+                            {% endfor %}
+                        </div>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+                </div>
+                <style>
+                    @media (max-width: 768px) {
+                    .DB_img {
+                    width: 95vw !important;
+                    }
+                    @media (max-width: 480px) {
+                        .DB_img {
+                        background-image: url('{{template.mobile_img.url}}') !important;
+                        }
+                </style>
+            {%endfor%}
+        </div>
+        <!--Pagination-->
+        <div class="paginator">
+            {% if page_obj.has_previous %}
+                <div class="prev">
+                    <a  href="?page={{ page_obj.previous_page_number }}">
+                    <button class="pag_prev"><i class="fa-solid fa-arrow-left-long"></i> Previous page</button>
+                    </a>
+                    </div>
+                    {% endif %}
+                    {% if page_obj.has_next %}
+                    <div class="next">
+                    <a href="?page={{ page_obj.next_page_number }}">
+                    <button class="pag_next">Next page <i class="fa-solid fa-arrow-right"></i></button>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <style>
+    .DB {
+    padding:  0;
+    }
+
+    @media (max-width: 480px) {
+    .container {
+    padding-top: 8vh !important;
+    }
+    </style>
+
+
+    <script src="{%static 'HOME/javascript/webSlider.js'%}"></script>
+
+{% endblock content %}

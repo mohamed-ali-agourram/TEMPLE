@@ -1,0 +1,129 @@
+{% extends 'HOME/base.html' %}
+{% load static %}
+{% block content %}
+        <div class="box">
+        <h1 class="detail_title">{{templates.title}}</h1>
+        <ul class="about_template">
+        <li class="type">
+        {%if templates.category%}
+        <a href="{% url 'templates' %}" style="color:orange;">Home</a>>
+        <form method=GET action="{%url 'search'%}">
+        <label for="{{templates.category}}"> <p>{{templates.category}}</p>
+        <input id="{{templates.category}}" class="input_filter" name="category" type="checkbox" value="{{templates.category}}" onchange="this.form.submit()" hidden>
+        </label>
+        </form>
+        {%endif%}
+        </li>
+        <li class="date"><i class="fa-solid fa-calendar-days"></i> {{templates.date_posted|date:"M d,Y"}}</li>
+        <li>
+        <form method=GET action="{%url 'search'%}">
+        <div class="tags flex">
+        <p>Tags</p>
+        {% for tag in templates.tags.all %}
+        <label for="{{tag}}"> <button>{{tag}}</button>
+        <input id="{{tag}}" class="input_filter" name="tag" type="checkbox" value="{{tag}}" onchange="this.form.submit()" hidden>
+        </label>
+        {% endfor %}
+        </div>
+        </form>
+        </li>
+        </ul>
+        {%if templates.ytb_link%}
+        <div class="ytb_div">
+        <iframe class="ytb_link" src="{{templates.ytb_link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        {% endif %}
+        <h2>Description:</h2>
+        <div class="info">
+        {% if templates.description %}
+        <p class="detail_description">{{templates.description}}</p> 
+        {% endif %}
+        </div>
+        <h2>Source Code:</h2>
+        <div class="slider-wrraper">
+        <ul class="controls">
+            <li id="html_li" class="selected"><i class="fa-brands fa-html5"></i> HTML</li>
+            <li><i class="fa-brands fa-css3"></i> CSS</li>
+            <li><i class="fa-brands fa-js"></i> JS</li>
+            <li><i class="fa-solid fa-code"></i> PREVIEW</li>
+            {% if templates.mobile_view %}
+            <li class="mobile-li"><i class="fa-regular fa-mobile-button"></i> MOBILE</li>
+            {% endif %}
+        </ul>
+        <div class="carousel">
+            <div class="slider">
+                <div class="code_slides">
+                <button class="btn btn_HTML"><span class="span_HTML">Copy</span><i class="fa-regular fa-copy"></i> </button><textarea readonly class="area_HTML"><head>
+{{templates.html_head}}
+</head>
+<body>
+{{templates.html_body}}
+</body></textarea>
+            </div>
+            <div class="code_slides">
+                <button class="btn btn_CSS"><span class="span_CSS">Copy</span><i class="fa-regular fa-copy"></i></button>
+                <textarea readonly class="area_CSS">{{templates.css_code}}</textarea>
+            </div>
+            <div class="code_slides">
+                <button class="btn btn_JS"><span class="span_JS">Copy</span><i class="fa-regular fa-copy"></i></button>
+                <textarea readonly class="area_JS">{{templates.js_code}}</textarea>
+            </div>
+                <div class="code_slides">
+                <iframe srcdoc="
+                    <!DOCTYPE html>
+                    <html lang='en'>
+                    <head>
+                        {{templates.html_head}}
+                    </head>
+                    <body>
+                        {{templates.html_body}}
+                        <style>{{templates.css_code}}</style>
+                        <script type='text/javascript'>
+                            {{templates.js_code}}
+                        </script>
+                    </body>
+                    </html>">
+                </iframe>
+                </div>
+                {% if templates.mobile_view %}
+                <div class="code_slides mobile-prev" id="myFrame">
+                <iframe  srcdoc="
+                <!DOCTYPE html>
+                <html lang='en'>
+                <head>
+                    {{templates.html_head}}
+                </head>
+                <body>
+                    {{templates.html_body}}
+                    <style>{{templates.css_code}}</style>
+                    <script type='text/javascript'>
+                        {{templates.js_code}}
+                    </script>
+                </body>
+                </html>
+                "></iframe>
+                </div>
+                {% else %}
+                <style>
+                    .slider {
+                        display: flex;
+                        height: 100%;
+                        width: 65vw*4;
+                    }
+                    @media (max-width: 768px) {
+                        .slider {
+                            width: 90vw*4;
+                        }
+                </style>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <style>
+    .web_slider{
+    display:none  !important;
+    }
+    </style>
+    <script src="{%static 'HOME/javascript/main.js'%}"></script>
+{% endblock content %}

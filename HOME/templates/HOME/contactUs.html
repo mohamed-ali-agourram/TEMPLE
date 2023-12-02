@@ -1,0 +1,35 @@
+{% extends 'HOME/base.html' %}
+{% block content %}
+    <div class="content__contactus">
+        <h1>Conatct Us</h1>
+        <!--Contact form-->
+        <div class="contact-form">
+            <p>- Contact us directly if you have any questions our staff members will be happy to contact you directly and answer your questions as soon as possible -</p>
+            <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">SEND <i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+        </div>
+        <div class="social_media_links">
+            <h2>Our social media links</h2>
+                <div class="links">
+                    <p><i class="fa-brands fa-github"></i>github - <a href="#">www.github.com/TEMPLE</a></p>
+                    <p><i class="fa-brands fa-instagram"></i>instagram - <a href="#">www.instagram.com/TEMPLE</a></p>
+                    <p><i class="fa-brands fa-facebook"></i>facebook - <a href="#">www.facebook.com/TEMPLE</a></p>
+                    <p><i class="fa-brands fa-youtube"></i>youtube - <a href="#">www.youtube.com/TEMPLE</a></p>
+                    <p><i class="fa-brands fa-twitter"></i>twitter - <a href="#">www.twitter.com/TEMPLE</a></p>
+                </div>
+    <br><br>
+            <div class="gmail">
+                <p>If you have any other questions please <span style="color: orange;">contact us</span>:</p>
+                <p><i class="fa-solid fa-at"></i>email - <span>W7aicha.123@gmail.com</span></p>
+            </div>
+        </div>
+    </div>
+<style>
+    .web_slider{
+        display:none  !important;
+    }
+</style>
+{% endblock content %}

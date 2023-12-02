@@ -1,0 +1,125 @@
+.content__aboutus {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3vh;
+    padding: 2vh 0;
+    border-radius: 10px;
+    h1 {
+        color: $pc;
+        padding: 2vh;
+        align-self: center;
+        font-size: 3rem;
+        font-weight: bold;
+    }
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    position: sticky;
+    top: 5vh;
+}
+
+.aboutus_description {
+    border-left: 5px solid $pc;
+    p {
+        padding-left: 2vw;
+        padding-right: 2px;
+        font-size: 17px;
+        color: rgb(48, 47, 47);
+        font-weight: bold;
+    }
+}
+
+.testimonials {
+    width: 100%;
+    border-left: 5px solid $pc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2.5vh;
+    padding-left: 2vw;
+}
+
+.testimonial_content {
+    padding: 1vh;
+    width: 95%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 5px;
+    background: #f0f3f5;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.comnt {
+    font-size: 15px;
+}
+
+.client {
+    font-weight: bold;
+}
+
+.source {
+    font-weight: 600;
+}
+
+.testimonial_aside {
+    display: flex;
+    height: fit-content;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 90px;
+        height: 90px;
+        border-radius: 100%;
+    }
+}
+
+.testimonial_data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2vw;
+}
+
+.social_media_links {
+    width: 100%;
+    h2 {
+        padding: 1vw;
+    }
+    div {
+        padding: 0 2vw;
+        border-left: 5px solid $pc;
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.5rem;
+        gap: 5px;
+        p {
+            width: 100%;
+            font-size: 15px;
+            color: rgb(48, 47, 47);
+        }
+    }
+    a {
+        color: $sc1;
+    }
+}
+
+.hideelem {
+    visibility: hidden !important;
+}
+
+.gmail {
+    width: 100%;
+    padding: 1vw;
+    font-size: 18px;
+    a {
+        color: $sc1;
+    }
+}

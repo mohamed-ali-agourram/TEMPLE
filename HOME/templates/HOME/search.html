@@ -1,0 +1,90 @@
+{% extends 'HOME/base.html' %}
+{% load pagination_tag %}
+{% load static %}
+{% block content %}
+<div class="content__templates">
+    <div class="query_info">
+        {% if search %}
+            <p><i class="fa-solid fa-bell"></i> We found <span>({{total}})</span> of <span>'{{search}}'</span>... <a href="{% url 'templates' %}">show all templates</a></p>
+        {% else %}
+            <p><i class="fa-solid fa-bell-slash"></i> please make sure to input a query!  <a href="{% url 'templates' %}">show all templates</a></p>
+        {% endif %}
+    </div>
+    {% if search %}
+        <div class="query_results">
+
+            {%for template in query%}
+            
+            <div class="template">
+                <a  href="{% url 'template-detail' template.id %}">
+                    <div class="DB_img" style="background-image: url('{{template.desktop_img.url}}');background-size: 100% 100%; background-repeat:no-repeat;">
+                        <div></div>
+                        </div>
+                </a>
+                <div class="template_description">
+                    <div>
+                    <a  href="{% url 'template-detail' template.id %}">
+                    <p class="title">{{template.title}}</p></a>
+                    <p class="date"><i class="fa-solid fa-calendar-days showi"></i> {{template.date_posted|date:"M d,Y"}}</p>
+                </div class="tags_wraper">
+                    {% if template.tags %}
+                    <form method=GET action="{%url 'search'%}">
+                        <div class="template_tags">
+                        {% for tag in template.tags.all %}
+                        <label for="{{tag}}"> <p>{{tag}}</p>
+                            <input id="{{tag}}" class="input_filter" name="tag" type="checkbox" value="{{tag}}" onchange="this.form.submit()" hidden>
+                            </label>
+                        {% endfor %}
+                    </div>
+                    </form>
+                    {% endif %}
+            </div>
+            </div>
+            <style>
+                @media (max-width: 768px) {
+                .DB_img {
+                width: 95vw !important;
+                }
+                @media (max-width: 480px) {
+                    .DB_img {
+                    background-image: url('{{template.mobile_img.url}}') !important;
+                    }
+            </style>
+            {%endfor%}
+        </div>
+        <div class="paginator">
+            {% if query.has_previous %}
+            <div class="prev">
+                <a class="pag_prev" href="{% pagination_url query.previous_page_number 'page' request.GET.urlencode %}">
+                    <button class="pag_prev"><i class="fa-solid fa-arrow-left-long"></i> Previous page</button>
+                </a>
+            </div>
+            {% endif %}
+            {% if query.has_next %}
+            <div class="next">
+                <a class="pag_next" href="{% pagination_url query.next_page_number 'page' request.GET.urlencode %}">
+                    <button class="pag_next">Next page <i class="fa-solid fa-arrow-right"></i></button>
+                </a>
+            </div>
+                {% endif %}
+    </div>
+    {% endif %}
+</div>
+<style>
+
+    .query_results{
+        border: none;
+    }
+    .content__templates {
+        padding: 0px;
+    }
+    .DB {
+        padding: 3vh 0;
+    }
+    .web_slider{
+        display:none  !important;
+    }
+</style>
+
+
+{% endblock content %}

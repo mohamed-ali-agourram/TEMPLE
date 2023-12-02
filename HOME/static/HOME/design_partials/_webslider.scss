@@ -1,0 +1,139 @@
+$w:70vw;
+.web_slider {
+    padding-top: 2vh;
+    width: 94VW;
+    height: 60vh;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: $w 30vw;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    &:hover {
+        button {
+            visibility: inherit;
+        }
+    }
+    button {
+        padding: 5px;
+        font-size: 1.5rem;
+        visibility: hidden;
+        font-weight: normal;
+        background: white;
+    }
+}
+
+.slider_content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+    color: white;
+}
+
+#prev-btn {
+    left: 0px;
+    position: absolute;
+    top: 50%;
+}
+
+#next-btn {
+    position: absolute;
+    right: 25.5%;
+    top: 50%;
+}
+
+.slides {
+    width: $w*6;
+    display: flex;
+    cursor: pointer;
+    a {
+        color: white;
+    }
+}
+
+.slide {
+    width: $w;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 30px;
+    transition: .5s all;
+    border-right: 3px solid white;
+    background-size: 70vw 58vh;
+    &:hover {
+        background-size: 72vw 60vh;
+    }
+}
+
+.slide_info {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-size: 30px;
+    padding: 4vh;
+    background: rgba(0, 0, 0, 0.473);
+    &:hover {
+        background: rgba(128, 128, 128, 0.459);
+    }
+}
+
+.secondory {
+    width: 81%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    z-index: 1;
+    gap: 3px;
+    div {
+        width: 100%;
+        a {
+            color: white
+        }
+    }
+}
+
+.secondory__data {
+    height: 100%;
+    cursor: pointer;
+    p {
+        color: white;
+        font-size: 15px;
+    }
+    transition: .5s all;
+    background-size: 24.5vw 29vh;
+    &:hover {
+        background-size: 25.5vw 29.5vh;
+    }
+}
+
+.secondory__info {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 3vh;
+    background: rgba(0, 0, 0, 0.473);
+    &:hover {
+        background: rgba(128, 128, 128, 0.459);
+    }
+}
+
+.slider_tags {
+    padding: 1.5vh 0;
+    span {
+        background: #543d68;
+        padding: 2px;
+        border-radius: 2px;
+        font-size: 15px;
+        width: 20px;
+        font-weight: normal;
+    }
+}

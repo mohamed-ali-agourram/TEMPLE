@@ -1,0 +1,269 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'HOME/style.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <Title>TEMPLE {% if title %} | {{title}}{% endif %}</Title>
+</head>
+
+
+<body>
+    <div class="overlay"></div>
+    <div class="fly" id="spinner">
+        <div class="bounce">TEMPLE.com</div>
+    </div>
+    <div class="container" id="item1">
+        <div class="smoth-scroller scroller" style="visibility:hidden;">
+            <a href="#item1"><i class="fa-solid fa-arrow-up"></i></a>
+        </div>
+        <header class="header">
+            <nav class="nav_bar">
+                <!-- Button Mangement -->
+                <div class="header__btn">
+                    <i id="open" class="header__btn-open bx bx-menu"></i>
+                </div>
+                <div class="first">
+                    <div class="header__logo"><a href="{% url 'templates' %}">TEMPLE.com</a></div>
+                    <div class="nav_links">
+                        <div class="link_1">
+                            <a href="{% url 'templates' %}">Home</a>
+                        </div>
+                        <div class="link_2">
+                            <form method="GET" action="{%url 'search'%}">
+                                <p class="link_2_filter">Category<i style="margin-left: 5px;font-size: 16px;" class="fa-solid fa-chevron-down"></p></p>
+                            <div class="nav_filter">
+                            {% for category in categories %}
+                            <label for="{{ category.title }}"> <p>{{ category.title }}</p>
+                            <input id="{{ category.title }}" class="input_filter" name="category" type="checkbox" value="{{ category.title }}" onchange="this.form.submit()" hidden/>
+                            </label>
+                            {% endfor %}
+                        </div>
+                        </form>
+                    </div>
+                    <div class="link_3">
+                        <a href="{% url 'aboutus'%}" target="_blank" class="nav-link-3">About us</a>
+                    </div>
+                    <div class="link_4"><a href="{% url 'contactus'%}" target="_blank" class="nav-link-3">Contact us</a></div>
+                </div>
+                </div>
+                <div class="search_elems">
+                    <div id="open_search">
+                    <i  class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <div id="close_search" style="display: none;">
+                            <i class="header__btn-close bx bx-x" style="font-size: 25px;"></i>
+                        </div>
+                        <form method="GET" action="{%url 'search'%}">
+                            <label for="search" class="search_label" style="visibility: hidden;">
+                            <div class="triangle"></div>
+                            <div class="search_input">
+                            <input type="text" name="q" placeholder="Search....">
+                            <button class="Search" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                        </label>
+                        </form>
+                    </div>
+            </nav>
+
+        </header>
+        <div class="mobile_header" id="mobile-menu">
+            <div class="HON">
+                <div class="A">
+                    <div class="mobile_header__logo"><a href="{% url 'templates' %}">TEMPLE.com</a></div>
+                    <i id="close" class="header__btn-close bx bx-x" style="font-size: 40px;"></i>
+                </div>
+            </div>
+            <div class="mobile_nav_links">
+                <div class="link_1">
+                    <a href="{% url 'templates' %}">Home</a>
+                </div>
+                <div class="link_2">
+                    <form method="GET" action="{%url 'search'%}">
+                        <p id="open-links" class="mobile_link_2_filter" style="gap: 1vw;">Category<i style="font-size:14px;" class="fa-solid fa-chevron-down"></p>
+                        <p id="close-links" class="mobile_link_2_filter hide" style="gap: 1vw;">Category
+                            <i class="fa-solid fa-angle-up" style="font-size:14px;"></i></p>
+                        <div class="mobile_nav_filter">
+                            {% for category in categories %}
+                            <label for="{{ category.title }}"> <p>{{ category.title }}</p>
+                        <input id="{{ category.title }}" class="input_filter" name="category" type="checkbox" value="{{ category.title }}" onchange="this.form.submit()" hidden/>
+                        </label> {% endfor %}
+                        </div>
+                    </form>
+                </div>
+                <div class="link_3">
+                    <a href="{% url 'aboutus'%}" target="_blank" class="nav-link-3">About us</a>
+                </div>
+                <div class="link_4"><a href="{% url 'contactus'%}" target="_blank" class="nav-link-3">Contact us</a></div>
+            </div>
+            <div class="MobileFollowUs">
+                <p>FOLLOW US</p>
+                <div>
+                    <i class="fa-brands fa-github"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                </div>
+            </div>
+        </div>
+
+
+        <!--alerts-->
+        {%if messages%} {%for message in messages%}
+        <div class="alert">{{message}}</div>
+        {%endfor%} {%endif%}
+        <div class="web_slider the_item fadeInLeft removelem">
+            <div class="slider_content">
+                <div class="slides">
+                    {% for slide in favorite %}
+                    <a href="{% url 'template-detail' slide.id %}">
+                        <div class="slide" style="background-image: url('{{slide.desktop_img.url}}');background-repeat: no-repeat;background-position: center;">
+                            <div class="slide_info">
+                                <div class="slider_tags">
+                                    {% for tag in slide.tags.all %}
+                                    <span>{{tag}}</span> {% endfor %}
+                                </div>
+                                <p>{{slide.title}}</p>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="secondory">
+                {% for data in random1 %}
+
+                <div class="secondory__data" style="background-image: url('{{data.desktop_img.url}}');background-repeat:no-repeat; ">
+                    <a href="{% url 'template-detail' data.id %}">
+                        <div class="secondory__info">
+                            <div class="slider_tags">
+                                {% for tag in data.tags.all %}
+                                <span>{{tag}}</span> {% endfor %}
+                            </div>
+                            <p>{{data.title}}</p>
+                        </div>
+                    </a>
+                </div>
+
+                {% endfor %} {% for data2 in random2 %}
+                <div class="secondory__data" style="background-image: url('{{data2.desktop_img.url}}');background-repeat:no-repeat;">
+                    <a href="{% url 'template-detail' data2.id %}">
+                        <div class="secondory__info">
+                            <div class="slider_tags">
+                                {% for tag in data2.tags.all %}
+                                <span>{{tag}}</span> {% endfor %}
+                            </div>
+                            <p>{{data2.title}}</p>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            <button id="prev-btn">
+                <a class="fas fa-chevron-left"></a>
+            </button>
+            <button id="next-btn">
+                <a class="fas fa-chevron-right"></a>
+            </button>
+        </div>
+        <section class="content the_item removelem">
+            <div class="DB fadeInLeft">
+                {% block content %}{% endblock content %}
+            </div>
+            <div class="filter fadeInLeft">
+                <form class="filter_form" method="GET" action="{%url 'search'%}">
+                    <span class="filter_title">Categories</span>
+                    <div class="filter_label">
+                        {% for category in categories %}
+                        <label for="{{ category.title }}"> <p><span style="color:orange;margin-right:2px;">>  </span>{{ category.title }}</p>
+                    <input id="{{ category.title }}" class="input_filter" name="category" type="checkbox" value="{{ category.title }}" onchange="this.form.submit()" hidden>
+                    </label> {% endfor %}
+                    </div>
+                </form>
+                <div class="ads">
+                    Google ads
+                </div>
+                <div class="populer">
+                    <span class="filter_title" style="margin-top: -15px">populer templates</span> {% for post in populer %}
+                    <a href="{% url 'template-detail' post.id %}">
+                        <div style="background-image: url('{{post.desktop_img.url}}');background-size: 23vw 20vh; background-repeat:no-repeat;">
+                            <div>
+                                <p>{{post.title}}</p>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+                <div class="ads ads_sticky">
+                    Google ads
+                </div>
+                <form class="filter_form tags_sticky" method="GET" action="{%url 'search'%}">
+                    <span class="filter_title">Tags</span>
+                    <div class="filter_label flex">
+                        {% for tag in tags %}
+                        <label for="{{tag.name}}"> <p><span style="color:orange;margin-right:2px;">>  </span>{{tag.name}}</p>
+                        <input id="{{tag.name}}" class="input_filter" name="tag" type="checkbox" value="{{tag.name}}" onchange="this.form.submit()" hidden>
+                        </label> {% endfor %}
+                    </div>
+                </form>
+            </div>
+        </section>
+
+
+        <footer class="footer the_item removelem">
+            <div class="footer__content">
+                <div class="footer-AboutUs">
+                    <div class="logo">TEMPLE.com</div>
+                    <div class="footer_text">
+                        <a href="{% url 'aboutus' %}" target="_blank">
+                            <p>ABOUT US</p>
+                        </a>
+                        <p style="padding: 1vh 0;">TEMPLE is a platform where you can learn HTML, CSS, and JavaScript along with creative CSS Animations and Effects</p>
+                    </div>
+                </div>
+                <div class="FollowUs">
+                    <p>FOLLOW US</p>
+                    <div>
+                        <i class="fa-brands fa-github"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-youtube"></i>
+                        <i class="fa-brands fa-twitter"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p class="footer_info">
+                    Copyright © 2022 TEMPLE All Rights Reserved
+                </p>
+                <div class="links">
+                    <a class="link-1" href="{% url 'templates' %}">Home</a>
+                    <a class="link-2" href="#">Terms & Condition</a>
+                    <a class="link-3" href="#">Privacy policy</a>
+                    <a class="link-4" href="{% url 'contactus' %}" target="_blank">Contact</a>
+                </div>
+            </div>
+        </footer>
+
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="{%static 'HOME/javascript/search.js'%}"></script>
+        <script src="{%static 'HOME/javascript/mobile.js'%}"></script>
+        <script src="{%static 'HOME/javascript/smothscroll.js'%}"></script>
+        <script src="{%static 'HOME/javascript/spinner.js'%}"></script>
+        <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js"></script>
+        <script>
+            const scroll = new SmoothScroll('.smoth-scroller a[href*="#"]', {
+                speed: 500
+            });
+        </script>
+</body>
+
+</html>
